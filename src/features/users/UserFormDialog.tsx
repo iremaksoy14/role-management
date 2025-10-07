@@ -92,15 +92,21 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
             key={initial?.id ?? "new"}
             className="w-full max-w-md rounded bg-white p-6"
           >
-            <Dialog.Title className="text-lg text-gray-700  font-medium mb-4">
+            <Dialog.Title className="text-lg text-gray-700 font-medium mb-2">
               {initial ? "Kullanıcı Düzenle" : "Yeni Kullanıcı"}
             </Dialog.Title>
+
+            <Dialog.Description className="sr-only">
+              Bu diyalogda kullanıcı adı, rol ve izinleri belirleyip
+              kaydedebilirsiniz.
+            </Dialog.Description>
 
             {formError && (
               <div
                 id="form-error"
                 role="alert"
-                className="mb-2 rounded-md bg-red-50 text-red-700 p-2"
+                aria-live="assertive"
+                className="mb-3 rounded-md bg-red-50 text-red-700 p-2"
               >
                 {formError}
               </div>
@@ -110,9 +116,12 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
               <div>
                 <label
                   htmlFor="name"
-                  className=" text-gray-700 block text-sm font-medium"
+                  className="block text-sm font-medium text-gray-700"
                 >
-                  İsim
+                  İsim{" "}
+                  <span className="text-red-600" aria-hidden="true">
+                    *
+                  </span>
                 </label>
                 <input
                   id="name"
@@ -120,14 +129,16 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                   aria-describedby="name-error"
                   aria-invalid={!!errors.name}
-                  className="mt-1 text-gray-700  block w-full rounded-md border border-gray-300 p-2"
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 text-gray-700"
                 />
                 {errors.name && (
                   <p
                     id="name-error"
                     role="alert"
+                    aria-live="polite"
                     className="mt-1 text-sm text-red-600"
                   >
                     {errors.name}
@@ -141,7 +152,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                 onChange={setPermissions}
               />
 
-              <div className="flex justify-end space-x-2">
+              <div className="flex justify-end gap-2">
                 <button
                   type="button"
                   ref={cancelButtonRef}

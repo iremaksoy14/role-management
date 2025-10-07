@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useRef } from "react";
 
 type Props = {
   open: boolean;
@@ -37,7 +36,7 @@ export default function ConfirmDialog({
       <Dialog
         as="div"
         className="relative z-30"
-        onClose={onClose}
+        onClose={(_) => onClose()}
         initialFocus={cancelRef}
       >
         <Transition.Child
@@ -64,18 +63,26 @@ export default function ConfirmDialog({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md rounded-2xl bg-white p-5 shadow-xl">
-                <Dialog.Title className="text-lg font-semibold text-gray-700 ">
+                <Dialog.Title className="text-lg font-semibold text-gray-700">
                   {title}
                 </Dialog.Title>
-                {description && (
-                  <p className="mt-2 text-sm text-gray-600">{description}</p>
+
+                <Dialog.Description className="mt-2 text-sm text-gray-600">
+                  {description ??
+                    "Bu işlemi onaylamak istediğinizden emin misiniz?"}
+                </Dialog.Description>
+
+                {busy && (
+                  <div role="status" aria-live="polite" className="sr-only">
+                    İşlem devam ediyor…
+                  </div>
                 )}
 
                 <div className="mt-4 flex items-center justify-end gap-2">
                   <button
                     ref={cancelRef}
                     type="button"
-                    className="rounded-lg border px-3 py-2 text-sm text-line "
+                    className="rounded-lg border px-3 py-2 text-sm text-line"
                     onClick={onClose}
                     disabled={busy}
                   >
