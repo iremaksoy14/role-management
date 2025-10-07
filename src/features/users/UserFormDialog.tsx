@@ -47,8 +47,8 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
 
     const trimmed = name.trim();
     const nextErrors: Record<string, string> = {};
-    if (!trimmed) nextErrors["name"] = "İsim zorunludur";
-    if (trimmed.length < 2) nextErrors["name"] = "İsim en az 2 karakter olmalı";
+    if (!trimmed) nextErrors["name"] = t("userForm.nameRequired");
+    if (trimmed.length < 2) nextErrors["name"] = t("userForm.nameMin");
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
@@ -60,7 +60,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
         (!initial || u.id !== initial.id)
     );
     if (hasDuplicate) {
-      setFormError("Bu isimde bir kullanıcı zaten var.");
+      setFormError(t("userForm.duplicate"));
       return;
     }
 
@@ -76,7 +76,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
       }
       onClose();
     } catch (err: any) {
-      setFormError("Kullanıcı kaydedilemedi: " + err.message);
+      setFormError(t("userForm.notSave") + err.message);
     }
   };
 
@@ -99,8 +99,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
             </Dialog.Title>
 
             <Dialog.Description className="sr-only">
-              Bu diyalogda kullanıcı adı, rol ve izinleri belirleyip
-              kaydedebilirsiniz.
+              {t("userForm.saveOptions")}
             </Dialog.Description>
 
             {formError && (

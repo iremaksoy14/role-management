@@ -16,8 +16,9 @@ export default function PermissionsMultiSelect({
   onChange,
   id = "permissions",
 }: Props) {
-  const selectedText = value.length ? value.join(", ") : "Seçiniz";
   const { t } = useTranslation();
+  const selectedText = value.length ? value.join(", ") : t("common.select");
+
   return (
     <div className="w-full">
       <label

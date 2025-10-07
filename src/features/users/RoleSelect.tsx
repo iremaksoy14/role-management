@@ -14,9 +14,9 @@ type Props = {
 export default function RoleSelect({
   value,
   onChange,
-
   id = "role",
 }: Props) {
+  
   const { t } = useTranslation();
   return (
     <div className="w-full">

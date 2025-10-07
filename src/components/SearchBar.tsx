@@ -8,7 +8,7 @@ export default function SearchBar() {
   const value = useAppSelector(selectSearch);
   const { t } = useTranslation();
   return (
-    <div className="w-full   sm:w-64">
+    <div className="w-full sm:w-64">
       <label htmlFor="search" className="sr-only text-gray-700">
         {t("userForm.searchByName")}
       </label>

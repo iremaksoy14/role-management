@@ -6,13 +6,13 @@ import LanguageDetector from "i18next-browser-languagedetector";
 const resources = {
   tr: {
     translation: {
-      // Genel
-      app: { title: "Case Çalışması - Role Yönetimi" },
+      app: { title: "Hastane Yönetim Paneli" },
       common: {
         save: "Kaydet",
         approve: "Onayla",
         cancel: "İptal",
         delete: "Sil",
+        select: "Seçiniz",
         edit: "Düzenle",
         search: "Ara",
         clearFilters: "Filtreleri Temizle",
@@ -36,22 +36,25 @@ const resources = {
         duplicate: "Bu isimde bir kullanıcı zaten var.",
         noUser: "Kriterlere uygun kullanıcı bulunamadı",
         searchByName: "İsimle Ara",
+        notSave: "Kullanıcı kaydedilemedi",
         role: "Rol",
         actions: "İşlemler",
+        saveOptions:
+          "Bu diyalogda kullanıcı adı, rol ve izinleri belirleyip kaydedebilirsiniz.",
         permissions: "İzinler",
       },
 
       empty: {
         title: "Kayıt Yok",
       },
-      // Tablolar
+
       table: {
-        users: "Kullanıcı Listesi",
+        users: "KULLANICI LİSTESİ",
         name: "Ad",
         role: "Rol",
         permissions: "İzinler",
       },
-      // Dialog
+
       confirm: {
         titleDelete: "Kullanıcıyı sil",
         descDelete: "“{{name}}” silinsin mi?",
@@ -59,12 +62,12 @@ const resources = {
         cancel: "İptal",
         busy: "İşlem devam ediyor…",
       },
-      // Filtreler
+
       filters: { role: "Rol Filtresi", all: "Tümü" },
-      // Roller & İzinler
+
       role: { Admin: "Admin", Doctor: "Doktor", Patient: "Hasta" },
       perm: { read: "Okuma", write: "Yazma" },
-      // Bildirimler (opsiyonel live region)
+
       live: {
         created: "Kullanıcı eklendi.",
         updated: "Kullanıcı güncellendi.",
@@ -74,13 +77,14 @@ const resources = {
   },
   en: {
     translation: {
-      app: { title: "Case Study - Role Management " },
+      app: { title: "Hospital Management Panel " },
       common: {
         save: "Save",
         cancel: "Cancel",
         delete: "Delete",
         edit: "Edit",
         approve: "Approve",
+        select: "Please select",
         search: "Search",
         clearFilters: "Clear Filters",
         loading: "Loading…",
@@ -108,9 +112,12 @@ const resources = {
         noUser: "User not found that meets the criteria",
         searchByName: "Search By name",
         permissions: "Permissions",
+        notSave: "Failed to save user",
+        saveOptions:
+          "In this dialog you can specify and save the username, role and permissions.",
       },
       table: {
-        users: "User List",
+        users: "USER LIST",
         name: "Name",
         role: "Role",
         permissions: "Permissions",

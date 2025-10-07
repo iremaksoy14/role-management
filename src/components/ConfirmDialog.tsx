@@ -8,7 +8,6 @@ type Props = {
   onConfirm: () => void;
   title: string;
   description?: string;
-
   tone?: "default" | "danger";
   busy?: boolean;
 };
@@ -19,7 +18,6 @@ export default function ConfirmDialog({
   onConfirm,
   title,
   description,
-
   tone = "default",
   busy = false,
 }: Props) {

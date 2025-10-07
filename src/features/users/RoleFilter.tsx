@@ -4,7 +4,6 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setRoleFilter, selectRole } from "./userSlice";
-
 import { ROLES, type Role } from "../../types";
 
 type Option = Role | "all";
