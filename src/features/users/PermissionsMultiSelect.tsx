@@ -3,28 +3,28 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { PERMISSIONS, type Permission } from "../../types";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   value: Permission[];
   onChange: (v: Permission[]) => void;
-  label?: string;
   id?: string;
 };
 
 export default function PermissionsMultiSelect({
   value,
   onChange,
-  label = "İzinler",
   id = "permissions",
 }: Props) {
   const selectedText = value.length ? value.join(", ") : "Seçiniz";
+  const { t } = useTranslation();
   return (
     <div className="w-full">
       <label
         htmlFor={id}
         className="block text-sm font-medium text-gray-700 mb-1"
       >
-        {label}
+        {t("userForm.permissions")}
       </label>
       <Listbox value={value} onChange={onChange} multiple>
         <div className="relative">

@@ -1,75 +1,82 @@
-Bu proje, bir sağlık kuruluşu için kullanıcı rol ve izin yönetim paneli geliştirilmesi üzerine hazırlanmıştır.
+Role Management – Case Çalışması
+
+Sağlık kuruluşu için kullanıcı rol ve izin yönetim paneli geliştirilmesi üzerine hazırlanmıştır.
 Amaç, modern frontend prensiplerini, state management yaklaşımını, erişilebilirlik (A11y) uygulamalarını ve kullanıcı deneyimi odaklı geliştirmeyi göstermektir.
 
 🚀 Özellikler
 
 👤 Kullanıcı Yönetimi
 
--Kullanıcı listesi görüntüleme
--Yeni kullanıcı ekleme
--Kullanıcı rol güncelleme (Admin, Doctor, Patient)
--Kullanıcı silme
--İsim bazlı arama
--Role göre filtreleme
+Kullanıcı listesi görüntüleme
+Yeni kullanıcı ekleme
+Kullanıcı rol güncelleme (Admin, Doctor, Patient)
+Kullanıcı silme
+İsim bazlı arama
+Role göre filtreleme
 
 🔑 İzin Yönetimi
 
--Kullanıcıya bir veya birden fazla izin (read, write) atanabilmesi
+Kullanıcıya bir veya birden fazla izin atanabilmesi (örn. read, write)
 
 ⚡ Performans & UX
 
--Pagination ile uzun listelerde performans optimizasyonu
--Boş/tekrar isim kontrolü ve doğrulama
--Anlamlı hata/uyarı mesajları
--Headless UI bileşenleri ile erişilebilir arayüz
+Pagination ile uzun listelerde performans optimizasyonu
+Boş / tekrar isim kontrolü ve doğrulama
+Anlamlı hata/uyarı mesajları
+Headless UI bileşenleri ile erişilebilir arayüz
+
+🌍 Çok Dilli Destek (i18next)
+
+react-i18next ile proje Türkçe ve İngilizce desteklemektedir.
+Önemli başlıklar, buton metinleri ve hata mesajları çeviriye bağlandı.
+Dinamik çeviri interpolasyonu:
 
 🎁 Opsiyonel Ekstralar
 
--Empty / Loading / Error durumlarına özel UI
--Küçük test senaryoları (React Testing Library)
--Memoization & selector optimizasyonları
--Basit tema / Design System yaklaşımı
+Empty / Loading / Error durumlarına özel UI
+Küçük test senaryoları (React Testing Library + jest-axe ile A11y testleri)
+Memoization & selector optimizasyonları
+Basit tema / Design System yaklaşımı
 
 🛠 Kullanılan Teknolojiler
 
 ⚛️ React 18
-
 📘 TypeScript
 🗂 Redux Toolkit
 🎨 Tailwind CSS
 ♿ Headless UI
 ⚡ Vite
+🧪 Jest, React Testing Library, jest-axe (testler için)
 
-📂 Adlandırma Tercihleri
+📂 Proje Yapısı ve Kod Standartları
 
--Component / Hook: PascalCase → UserCard.tsx, useUser.ts
--Dosya / Utils: camelCase → formatDate.ts
--Klasörler: kebab-case → user-profile/
--Importlar: Alias (@/) kullanımı
--Barrel: Kullanıldığı yerlerde index.ts ile export
+Component / Hook → PascalCase → UserTable.tsx, useUser.ts
+Util / Helper → camelCase → formatDate.ts
+Klasörler → kebab-case → user-profile/
+Importlar → Alias (@/) kullanımı
+Barrel → Uygun yerlerde index.ts export
+State Yönetimi → features/users/userSlice.ts altında Redux slice’ları, selector’lar ve async thunk’lar
+Stil → Tailwind CSS (özelleştirilmiş config ile utility-first)
 
-🎨 Stil Yönetimi
-
--TailwindCSS kullanıldı, tailwind.config.js özelleştirildi.
--Ortak stiller ve temalar utility-first mantığında yönetildi.
--Erişilebilirlik için kontrast ve aria özelliklerine dikkat edildi.
+Commit Mesajları → Anlamlı ve adım adım, tek commit değil süreci yansıtır şekilde
 
 ♿ Erişilebilirlik (A11y)
 
--Form alanlarında label ve aria-\* kullanımı
--Headless UI ile klavye ve screen reader uyumlu bileşenler
--Boş liste / sonuç yok durumlarında anlamlı geri bildirim mesajları
+Form alanlarında label, aria-\* ve hata mesajları için role="alert" kullanımı
+Headless UI bileşenleri (Dialog, Listbox) → klavye ve screen reader uyumlu
+Boş liste / sonuç yok durumlarında anlamlı geri bildirim mesajları
+jest-axe ile otomatik erişilebilirlik testleri
 
-🏃‍♂️ Çalıştırma
-
-# 1. Klasöre gir
-
+🏃‍♂️ Kurulum ve Çalıştırma
 cd role-management
-
-# 2. Bağımlılıkları yükle
-
 npm install
-
-# 3. Geliştirme sunucusunu başlat
-
+npx json-server --watch db.json --port 3001
 npm run dev
+
+NOT:
+Case süresince temel gereksinimler tamamlandı. Bonus olarak:
+
+Empty / Loading / Error state’leri
+A11y düzenlemeleri
+jest-axe tabanlı erişilebilirlik için paket
+eklendi.

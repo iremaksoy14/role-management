@@ -1,12 +1,12 @@
 import React from "react";
 import type { User } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-
 import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import PermissionsBadges from "./PermissionsBadges";
 import { deleteUser, selectStatus, selectPagedUsers } from "../users/userSlice";
 import { useState } from "react";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import { useTranslation } from "react-i18next";
 
 type Props = { onEdit?: (u: User) => void };
 
@@ -14,7 +14,7 @@ export default function UserTable({ onEdit }: Props) {
   const dispatch = useAppDispatch();
   const users = useAppSelector(selectPagedUsers);
   const status = useAppSelector(selectStatus);
-
+  const { t } = useTranslation();
   const [toDelete, setToDelete] = useState<User | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -40,10 +40,19 @@ export default function UserTable({ onEdit }: Props) {
         >
           <thead className="bg-gray text-left text-line">
             <tr>
-              <th className="px-3 py-2 font-medium ">Ad</th>
-              <th className="px-3 py-2 font-medium">Rol</th>
-              <th className="px-3 py-2 font-medium">İzinler</th>
-              <th className="px-3 py-2 font-medium text-right">Aksiyonlar</th>
+              <th className="px-3 py-2 font-medium ">
+                {" "}
+                {t("userForm.nameLabel")}
+              </th>
+              <th className="px-3 py-2 font-medium"> {t("userForm.role")}</th>
+              <th className="px-3 py-2 font-medium">
+                {" "}
+                {t("userForm.permissions")}
+              </th>
+              <th className="px-3 py-2 font-medium text-right">
+                {" "}
+                {t("userForm.actions")}
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -67,7 +76,10 @@ export default function UserTable({ onEdit }: Props) {
                       disabled={actionDisabled}
                     >
                       <PencilIcon className="h-4 w-4" aria-hidden="true" />
-                      <span className="hidden sm:inline">Düzenle</span>
+                      <span className="hidden sm:inline">
+                        {" "}
+                        {t("common.edit")}
+                      </span>
                     </button>
                     <button
                       type="button"
@@ -78,7 +90,10 @@ export default function UserTable({ onEdit }: Props) {
                       disabled={actionDisabled}
                     >
                       <TrashIcon className="h-4 w-4" aria-hidden="true" />
-                      <span className="hidden sm:inline">Sil</span>
+                      <span className="hidden sm:inline">
+                        {" "}
+                        {t("common.delete")}
+                      </span>
                     </button>
                   </div>
                 </td>
@@ -93,7 +108,9 @@ export default function UserTable({ onEdit }: Props) {
         onClose={() => (busy ? null : setToDelete(null))}
         onConfirm={handleDelete}
         title="Kullanıcıyı sil"
-        description={toDelete ? `“${toDelete.name}” silinsin mi?` : ""}
+        description={
+          toDelete ? t("confirm.descDelete", { name: toDelete.name }) : ""
+        }
         confirmText="Sil"
         tone="danger"
         busy={busy}

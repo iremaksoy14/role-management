@@ -1,9 +1,12 @@
 import React from "react";
 import { useAppDispatch } from "../store/hooks";
 import { setRoleFilter, setSearch } from "../features/users/userSlice";
+import { useTranslation } from "react-i18next";
 
 export default function ClearFilters() {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
   const clearAll = () => {
     dispatch(setSearch(""));
     dispatch(setRoleFilter("all"));
@@ -14,7 +17,7 @@ export default function ClearFilters() {
       className="mt-3 rounded-lg border px-3 py-2 text-sm text-gray-700"
       onClick={clearAll}
     >
-      Filtreleri temizle
+      {t("common.clearFilters")}
     </button>
   );
 }

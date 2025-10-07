@@ -1,5 +1,7 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 export default function Loader() {
+  const { t } = useTranslation();
   return (
     <div
       role="status"
@@ -22,7 +24,7 @@ export default function Loader() {
         />
         <path d="M22 12a10 10 0 0 1-10 10" fill="currentColor" />
       </svg>
-      Yükleniyor…
+      {t("common.loading")}
     </div>
   );
 }

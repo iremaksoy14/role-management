@@ -3,27 +3,28 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { ROLES, type Role } from "../../types";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   value: Role;
   onChange: (v: Role) => void;
-  label?: string;
   id?: string;
 };
 
 export default function RoleSelect({
   value,
   onChange,
-  label = "Rol",
+
   id = "role",
 }: Props) {
+  const { t } = useTranslation();
   return (
     <div className="w-full">
       <label
         htmlFor={id}
         className="block text-sm font-medium text-gray-700 mb-1"
       >
-        {label}
+        {t("userForm.role")}
       </label>
       <Listbox value={value} onChange={onChange}>
         <div className="relative">

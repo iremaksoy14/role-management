@@ -4,7 +4,6 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import usersReducer from "@/features/users/userSlice";
 import { render } from "@testing-library/react";
 
-// root reducer'ı açıkça tanımla → configureStore doğru overload'ı seçsin
 const rootReducer = combineReducers({
   users: usersReducer,
 });

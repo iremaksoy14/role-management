@@ -5,6 +5,7 @@ import { createUser, updateUser } from "./userSlice";
 import RoleSelect from "./RoleSelect";
 import PermissionsMultiSelect from "./PermissionsMultiSelect";
 import { type Permission } from "@/types";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   open: boolean;
@@ -15,6 +16,7 @@ type Props = {
 export default function UserFormDialog({ open, initial, onClose }: Props) {
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const [name, setName] = useState(initial?.name ?? "");
   const [role, setRole] = useState(initial?.role ?? "Patient");
@@ -93,7 +95,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
             className="w-full max-w-md rounded bg-white p-6"
           >
             <Dialog.Title className="text-lg text-gray-700 font-medium mb-2">
-              {initial ? "Kullanıcı Düzenle" : "Yeni Kullanıcı"}
+              {initial ? t("userForm.editTitle") : t("userForm.newTitle")}
             </Dialog.Title>
 
             <Dialog.Description className="sr-only">
@@ -118,7 +120,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  İsim{" "}
+                  {t("userForm.name")}
                   <span className="text-red-600" aria-hidden="true">
                     *
                   </span>
@@ -159,13 +161,13 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                   onClick={onClose}
                   className="rounded bg-gray-200 px-4 py-2 text-gray-700"
                 >
-                  İptal
+                  {t("common.cancel")}
                 </button>
                 <button
                   type="submit"
                   className="rounded bg-blue-600 px-4 py-2 text-white"
                 >
-                  Kaydet
+                  {t("common.save")}
                 </button>
               </div>
             </form>

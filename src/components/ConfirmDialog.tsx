@@ -1,5 +1,6 @@
 import React, { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   open: boolean;
@@ -25,7 +26,7 @@ export default function ConfirmDialog({
   busy = false,
 }: Props) {
   const cancelRef = useRef<HTMLButtonElement>(null);
-
+  const { t } = useTranslation();
   const confirmClass =
     tone === "danger"
       ? "bg-red-600 hover:bg-red-700"
@@ -68,13 +69,12 @@ export default function ConfirmDialog({
                 </Dialog.Title>
 
                 <Dialog.Description className="mt-2 text-sm text-gray-600">
-                  {description ??
-                    "Bu işlemi onaylamak istediğinizden emin misiniz?"}
+                  {description ?? t("common.approveQuestion")}
                 </Dialog.Description>
 
                 {busy && (
                   <div role="status" aria-live="polite" className="sr-only">
-                    İşlem devam ediyor…
+                    {t("common.continue")}
                   </div>
                 )}
 

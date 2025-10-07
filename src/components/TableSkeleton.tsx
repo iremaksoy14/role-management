@@ -1,14 +1,22 @@
 import React from "react";
+import { PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 export default function TableSkeleton({ rows = 8 }: { rows?: number }) {
+  const { t } = useTranslation();
   return (
     <div className="overflow-x-auto rounded-lg border">
       <table className="w-full border-collapse text-sm">
         <thead className="bg-gray-50 text-left text-gray-600">
           <tr>
-            <th className="px-3 py-2 font-medium">Ad</th>
-            <th className="px-3 py-2 font-medium">Rol</th>
-            <th className="px-3 py-2 font-medium">İzinler</th>
-            <th className="px-3 py-2 font-medium text-right">Aksiyonlar</th>
+            <th className="px-3 py-2 font-medium">{t("userForm.name")}</th>
+            <th className="px-3 py-2 font-medium">{t("userForm.role")}</th>
+            <th className="px-3 py-2 font-medium">
+              {" "}
+              {t("userForm.permissions")}
+            </th>
+            <th className="px-3 py-2 font-medium text-right">
+              {t("userForm.actions")}
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y">
