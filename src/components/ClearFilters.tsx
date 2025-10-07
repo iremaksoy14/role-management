@@ -11,7 +11,7 @@ export default function ClearFilters() {
   return (
     <button
       type="button"
-      className="mt-3 rounded-lg border px-3 py-2 text-sm"
+      className="mt-3 rounded-lg border px-3 py-2 text-sm text-gray-700"
       onClick={clearAll}
     >
       Filtreleri temizle

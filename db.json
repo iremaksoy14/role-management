@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": "u-01",
+      "name": "İrem Aksoy",
+      "role": "Admin",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "id": "u-02",
+      "name": "Ceren Aksoy",
+      "role": "Doctor",
+      "permissions": [
+        "read"
+      ]
+    },
+    {
+      "id": "u-03",
+      "name": "Oğuzhan Aydemir",
+      "role": "Patient",
+      "permissions": [
+        "write"
+      ]
+    },
+    {
+      "id": "5f76",
+      "name": "Merve Demir",
+      "role": "Admin",
+      "permissions": []
+    }
+  ]
+}

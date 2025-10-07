@@ -1,4 +1,3 @@
-import React from "react";
 import {
   createAsyncThunk,
   createSelector,
@@ -6,32 +5,9 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import type { Role, User } from "../../types";
-import { initialUsers } from "../../mocks/initialUsers";
+import { Status, RoleFilter, UsersState } from "../../types";
 
-// ------------------------
-// Helpers
-// ------------------------
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-const genId = () =>
-  globalThis.crypto && "randomUUID" in globalThis.crypto
-    ? globalThis.crypto.randomUUID()
-    : `u-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-
-// ------------------------
-// State types
-// ------------------------
-type Status = "idle" | "loading" | "error";
-type RoleFilter = Role | "all";
-
-export interface UsersState {
-  items: User[];
-  status: Status;
-  error: string | null;
-  search: string;
-  roleFilter: RoleFilter;
-  page: number; // 1-indexed
-  pageSize: number;
-}
+const BASE_URL = "http://localhost:3001";
 
 const initialState: UsersState = {
   items: [],
@@ -43,56 +19,70 @@ const initialState: UsersState = {
   pageSize: 10,
 };
 
-// RootState import etmeyelim; yapısal bir tip tanımlayalım
-type RootLike = { users: UsersState };
+export type RootLike = { users: UsersState };
 
-// ------------------------
-// Thunks (şimdilik mock üzerinden)
-// ------------------------
 export const fetchUsers = createAsyncThunk<User[]>("users/fetch", async () => {
-  await delay(300);
-  return initialUsers;
+  const res = await fetch(`${BASE_URL}/users`);
+  if (!res.ok) throw new Error("Yükleme hatası");
+  const data = await res.json();
+
+  return (data as any[]).map((u) => ({ ...u, id: String(u.id) })) as User[];
 });
 
-export const createUser = createAsyncThunk<User, Omit<User, "id">>(
-  "users/create",
-  async (data, { getState, rejectWithValue }) => {
-    await delay(250);
-    const state = getState() as RootLike;
-    const exists = state.users.items.some(
-      (u) => u.name.trim().toLowerCase() === data.name.trim().toLowerCase()
-    );
-    if (exists) return rejectWithValue("Aynı isim zaten mevcut") as any;
-    return { ...data, id: genId() };
-  }
-);
+export const createUser = createAsyncThunk<
+  User,
+  Omit<User, "id">,
+  { state: RootLike; rejectValue: string }
+>("users/create", async (payload, { getState, rejectWithValue }) => {
+  const lower = payload.name.trim().toLowerCase();
+  const exists = (getState().users.items || []).some(
+    (u) => u.name.trim().toLowerCase() === lower
+  );
+  if (exists) return rejectWithValue("Aynı isim zaten mevcut");
 
-export const updateUser = createAsyncThunk<User, User>(
-  "users/update",
-  async (data, { getState, rejectWithValue }) => {
-    await delay(250);
-    const state = getState() as RootLike;
-    const exists = state.users.items.some(
-      (u) =>
-        u.id !== data.id &&
-        u.name.trim().toLowerCase() === data.name.trim().toLowerCase()
-    );
-    if (exists) return rejectWithValue("Aynı isim zaten mevcut") as any;
-    return data;
-  }
-);
+  const res = await fetch(`${BASE_URL}/users`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) return rejectWithValue("Oluşturma hatası");
 
-export const deleteUser = createAsyncThunk<string, string>(
-  "users/delete",
-  async (id) => {
-    await delay(200);
-    return id;
-  }
-);
+  const created = await res.json();
+  return { ...created, id: String(created.id) } as User;
+});
 
-// ------------------------
-// Slice
-// ------------------------
+export const updateUser = createAsyncThunk<
+  User,
+  User,
+  { state: RootLike; rejectValue: string }
+>("users/update", async (payload, { getState, rejectWithValue }) => {
+  const lower = payload.name.trim().toLowerCase();
+  const exists = (getState().users.items || []).some(
+    (u) => u.id !== payload.id && u.name.trim().toLowerCase() === lower
+  );
+  if (exists) return rejectWithValue("Aynı isim zaten mevcut");
+
+  const res = await fetch(`${BASE_URL}/users/${payload.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) return rejectWithValue("Güncelleme hatası");
+
+  const updated = await res.json();
+  return { ...updated, id: String(updated.id) } as User;
+});
+
+export const deleteUser = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>("users/delete", async (id, { rejectWithValue }) => {
+  const res = await fetch(`${BASE_URL}/users/${id}`, { method: "DELETE" });
+  if (!res.ok) return rejectWithValue("Silme hatası");
+  return id;
+});
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -155,7 +145,7 @@ const usersSlice = createSlice({
     });
     builder.addCase(updateUser.rejected, (s, a) => {
       s.status = "error";
-      s.error = String(a.error.message || "Güncelleme hatası");
+      s.error = String(a.payload || a.error.message || "Güncelleme hatası");
     });
 
     // delete
@@ -169,7 +159,7 @@ const usersSlice = createSlice({
     });
     builder.addCase(deleteUser.rejected, (s, a) => {
       s.status = "error";
-      s.error = String(a.error.message || "Silme hatası");
+      s.error = String(a.payload || a.error.message || "Silme hatası");
     });
   },
 });
@@ -178,9 +168,6 @@ export const { setSearch, setRoleFilter, setPage, setPageSize } =
   usersSlice.actions;
 export default usersSlice.reducer;
 
-// ------------------------
-// Selectors (RootState importu yok; RootLike kullanılıyor)
-// ------------------------
 export const selectUsersState = (state: RootLike) => state.users;
 export const selectItems = (state: RootLike) => state.users.items;
 export const selectStatus = (state: RootLike) => state.users.status;
