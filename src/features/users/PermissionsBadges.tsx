@@ -1,9 +1,9 @@
 import React from "react";
 import type { Permission } from "../../types";
 export default function PermissionsBadges({ value }: { value: Permission[] }) {
-  if (!value?.length) return <span className="text-xs text-gray-500">—</span>;
+  if (!value?.length) return <span className="text-xs text-gray-500"></span>;
   return (
-    <div className="flex flex-wrap gap-1">
+    <div className="flex flex-wrap gap-1 justify-center">
       {value.map((p) => (
         <span
           key={p}

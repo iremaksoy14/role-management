@@ -134,7 +134,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                   required
                   aria-describedby="name-error"
                   aria-invalid={!!errors.name}
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 text-gray-700"
+                  className="mt-1 bg-white block w-full rounded-md border border-gray-300 p-2 text-gray-700"
                 />
                 {errors.name && (
                   <p
@@ -165,7 +165,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                 </button>
                 <button
                   type="submit"
-                  className="rounded bg-blue-600 px-4 py-2 text-white"
+                  className="rounded bg-line px-4 py-2 text-white"
                 >
                   {t("common.save")}
                 </button>

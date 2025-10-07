@@ -10,6 +10,7 @@ const resources = {
       app: { title: "Case Çalışması - Role Yönetimi" },
       common: {
         save: "Kaydet",
+        approve: "Onayla",
         cancel: "İptal",
         delete: "Sil",
         edit: "Düzenle",
@@ -39,9 +40,13 @@ const resources = {
         actions: "İşlemler",
         permissions: "İzinler",
       },
+
+      empty: {
+        title: "Kayıt Yok",
+      },
       // Tablolar
       table: {
-        users: "Kullanıcı listesi",
+        users: "Kullanıcı Listesi",
         name: "Ad",
         role: "Rol",
         permissions: "İzinler",
@@ -75,6 +80,7 @@ const resources = {
         cancel: "Cancel",
         delete: "Delete",
         edit: "Edit",
+        approve: "Approve",
         search: "Search",
         clearFilters: "Clear Filters",
         loading: "Loading…",
@@ -84,6 +90,9 @@ const resources = {
         prev: "Prev",
         next: "Next",
         pageSize: "Page Size",
+      },
+      empty: {
+        title: "No records",
       },
       userForm: {
         newTitle: "New User",
@@ -101,7 +110,7 @@ const resources = {
         permissions: "Permissions",
       },
       table: {
-        users: "User list",
+        users: "User List",
         name: "Name",
         role: "Role",
         permissions: "Permissions",

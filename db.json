@@ -18,14 +18,6 @@
       ]
     },
     {
-      "id": "u-03",
-      "name": "Oğuzhan Aydemir",
-      "role": "Patient",
-      "permissions": [
-        "write"
-      ]
-    },
-    {
       "id": "5f76",
       "name": "Merve Demir",
       "role": "Admin",

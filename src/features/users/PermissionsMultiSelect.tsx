@@ -56,9 +56,7 @@ export default function PermissionsMultiSelect({
                     value={opt}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-8 pr-3 ${
-                        active
-                          ? "bg-indigo-50 text-indigo-700"
-                          : "text-gray-900"
+                        active ? "bg-indigo-50 text-line" : "text-gray-900"
                       }`
                     }
                   >

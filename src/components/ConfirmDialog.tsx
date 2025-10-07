@@ -8,8 +8,7 @@ type Props = {
   onConfirm: () => void;
   title: string;
   description?: string;
-  confirmText?: string;
-  cancelText?: string;
+
   tone?: "default" | "danger";
   busy?: boolean;
 };
@@ -20,8 +19,7 @@ export default function ConfirmDialog({
   onConfirm,
   title,
   description,
-  confirmText = "Onayla",
-  cancelText = "İptal",
+
   tone = "default",
   busy = false,
 }: Props) {
@@ -86,7 +84,7 @@ export default function ConfirmDialog({
                     onClick={onClose}
                     disabled={busy}
                   >
-                    {cancelText}
+                    {t("common.cancel")}
                   </button>
                   <button
                     type="button"
@@ -95,7 +93,7 @@ export default function ConfirmDialog({
                     disabled={busy}
                     aria-busy={busy}
                   >
-                    {confirmText}
+                    {t("common.delete")}
                   </button>
                 </div>
               </Dialog.Panel>
