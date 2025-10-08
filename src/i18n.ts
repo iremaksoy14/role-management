@@ -62,6 +62,19 @@ const resources = {
         cancel: "İptal",
         busy: "İşlem devam ediyor…",
       },
+      errors: {
+        load: "Yükleme hatası",
+        create: "Oluşturma hatası",
+        update: "Güncelleme hatası",
+        delete: "Silme hatası",
+        duplicate: "Aynı isim zaten mevcut",
+      },
+      roleFilter: {
+        all: "Tümü",
+        Admin: "Admin",
+        Doctor: "Doktor",
+        Patient: "Hasta",
+      },
 
       filters: { role: "Rol Filtresi", all: "Tümü" },
 
@@ -129,6 +142,20 @@ const resources = {
         cancel: "Cancel",
         busy: "Processing…",
       },
+      errors: {
+        load: "Loading error",
+        create: "Creation error",
+        update: "Update error",
+        delete: "Delete error",
+        duplicate: "The same name already exists",
+      },
+      roleFilter: {
+        all: "All",
+        Admin: "Admin",
+        Doctor: "Doctor",
+        Patient: "Patient",
+      },
+
       filters: { role: "Role Filter", all: "All" },
       role: { Admin: "Admin", Doctor: "Doctor", Patient: "Patient" },
       perm: { read: "Read", write: "Write" },

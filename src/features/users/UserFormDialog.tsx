@@ -76,7 +76,14 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
       }
       onClose();
     } catch (err: any) {
-      setFormError(t("userForm.notSave") + err.message);
+      const key =
+        typeof err === "string"
+          ? err
+          : initial
+          ? "errors.update"
+          : "errors.create";
+
+      setFormError(t(key));
     }
   };
 
@@ -147,7 +154,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                 )}
               </div>
 
-              <RoleSelect value={role} onChange={setRole} />
+              <RoleSelect value={role} onChange={setRole} label={t("userForm.role")} />
               <PermissionsMultiSelect
                 value={permissions}
                 onChange={setPermissions}

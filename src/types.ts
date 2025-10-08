@@ -1,3 +1,4 @@
+import type { TOptions } from "i18next";
 export type Role = "Admin" | "Doctor" | "Patient";
 export type Permission = "read" | "write";
 
@@ -13,10 +14,14 @@ export interface User {
 
 export type Status = "idle" | "loading" | "error";
 export type RoleFilter = Role | "all";
+export interface I18nError {
+  key: string;
+  params?: TOptions;
+}
 export interface UsersState {
   items: User[];
   status: Status;
-  error: string | null;
+  error: I18nError | null;
   search: string;
   roleFilter: RoleFilter;
   page: number;

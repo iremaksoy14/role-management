@@ -1,5 +1,4 @@
 import React from "react";
-import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 export default function TableSkeleton({ rows = 8 }: { rows?: number }) {
   const { t } = useTranslation();

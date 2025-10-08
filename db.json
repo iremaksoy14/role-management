@@ -2,8 +2,8 @@
   "users": [
     {
       "id": "u-01",
-      "name": "İrem Aksoy",
-      "role": "Admin",
+      "name": "İrem Aksoy1",
+      "role": "Patient",
       "permissions": [
         "read",
         "write"
@@ -18,10 +18,12 @@
       ]
     },
     {
-      "id": "5f76",
-      "name": "Merve Demir",
+      "id": "baa1",
+      "name": "Oğuzhan Aydemir",
       "role": "Admin",
-      "permissions": []
+      "permissions": [
+        "read"
+      ]
     }
   ]
 }

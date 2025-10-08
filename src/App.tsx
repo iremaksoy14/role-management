@@ -8,6 +8,7 @@ import {
   selectStatus,
   selectError,
 } from "./features/users/userSlice";
+import type { TOptions } from "i18next";
 
 import Layout from "./components/Layout";
 import SearchBar from "./components/SearchBar";
@@ -26,10 +27,10 @@ import type { User } from "./types";
 
 function App() {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
   const total = useAppSelector(selectTotalCount);
   const status = useAppSelector(selectStatus);
   const error = useAppSelector(selectError);
+  const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<User | null>(null);
@@ -68,7 +69,9 @@ function App() {
           </div>
         </div>
 
-        <ErrorAlert message={error} />
+        {error ? (
+          <ErrorAlert message={t(error.key, error.params as TOptions)} />
+        ) : null}
 
         {status === "loading" && total === 0 ? (
           <TableSkeleton rows={8} />

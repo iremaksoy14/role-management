@@ -4,10 +4,8 @@ import {
   createSlice,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import type { Role, User } from "../../types";
-import { Status, RoleFilter, UsersState } from "../../types";
-
-const BASE_URL = "http://localhost:3001";
+import type { User, RoleFilter, UsersState } from "../../types";
+import { BASE_URL } from "@/api/config";
 
 const initialState: UsersState = {
   items: [],
@@ -38,14 +36,14 @@ export const createUser = createAsyncThunk<
   const exists = (getState().users.items || []).some(
     (u) => u.name.trim().toLowerCase() === lower
   );
-  if (exists) return rejectWithValue("Aynı isim zaten mevcut");
+  if (exists) return rejectWithValue("errors.duplicate");
 
   const res = await fetch(`${BASE_URL}/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  if (!res.ok) return rejectWithValue("Oluşturma hatası");
+  if (!res.ok) return rejectWithValue("errors.create");
 
   const created = await res.json();
   return { ...created, id: String(created.id) } as User;
@@ -60,14 +58,14 @@ export const updateUser = createAsyncThunk<
   const exists = (getState().users.items || []).some(
     (u) => u.id !== payload.id && u.name.trim().toLowerCase() === lower
   );
-  if (exists) return rejectWithValue("Aynı isim zaten mevcut");
+  if (exists) return rejectWithValue("errors.duplicate");
 
   const res = await fetch(`${BASE_URL}/users/${payload.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  if (!res.ok) return rejectWithValue("Güncelleme hatası");
+  if (!res.ok) return rejectWithValue("errors.update");
 
   const updated = await res.json();
   return { ...updated, id: String(updated.id) } as User;
@@ -79,7 +77,7 @@ export const deleteUser = createAsyncThunk<
   { rejectValue: string }
 >("users/delete", async (id, { rejectWithValue }) => {
   const res = await fetch(`${BASE_URL}/users/${id}`, { method: "DELETE" });
-  if (!res.ok) return rejectWithValue("Silme hatası");
+  if (!res.ok) return rejectWithValue("errors.delete");
   return id;
 });
 
@@ -116,7 +114,7 @@ const usersSlice = createSlice({
     });
     builder.addCase(fetchUsers.rejected, (s, a) => {
       s.status = "error";
-      s.error = String(a.error.message || "Yükleme hatası");
+      s.error = { key: "errors.load" };
     });
 
     // create
@@ -130,7 +128,10 @@ const usersSlice = createSlice({
     });
     builder.addCase(createUser.rejected, (s, a) => {
       s.status = "error";
-      s.error = String(a.payload || a.error.message || "Oluşturma hatası");
+      s.error =
+        typeof a.payload === "string"
+          ? { key: a.payload }
+          : { key: "errors.create" };
     });
 
     // update
@@ -145,7 +146,10 @@ const usersSlice = createSlice({
     });
     builder.addCase(updateUser.rejected, (s, a) => {
       s.status = "error";
-      s.error = String(a.payload || a.error.message || "Güncelleme hatası");
+      s.error =
+        typeof a.payload === "string"
+          ? { key: a.payload }
+          : { key: "errors.update" };
     });
 
     // delete
@@ -159,7 +163,7 @@ const usersSlice = createSlice({
     });
     builder.addCase(deleteUser.rejected, (s, a) => {
       s.status = "error";
-      s.error = String(a.payload || a.error.message || "Silme hatası");
+      s.error = { key: "errors.delete" };
     });
   },
 });

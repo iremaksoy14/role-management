@@ -1,23 +1,18 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setRoleFilter, selectRole } from "./userSlice";
 import { ROLES, type Role } from "../../types";
+import { useTranslation } from "react-i18next";
 
 type Option = Role | "all";
 const OPTIONS: Option[] = ["all", ...ROLES];
-const labelMap: Record<Option, string> = {
-  all: "Tümü",
-  Admin: "Admin",
-  Doctor: "Doctor",
-  Patient: "Patient",
-};
 
 export default function RoleFilter() {
   const dispatch = useAppDispatch();
   const value = useAppSelector(selectRole);
+  const { t } = useTranslation();
 
   return (
     <div className="w-full sm:w-48">
@@ -27,11 +22,11 @@ export default function RoleFilter() {
       >
         <div className="relative">
           <Listbox.Button
-            className="relative w-full text-gray-700 cursor-default rounded-lg border bg-white py-2 pl-3 pr-10 text-left text-sm
+            className="relative w-full cursor-default rounded-lg border bg-white py-2 pl-3 pr-10 text-left text-sm text-gray-700
                        focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            aria-label="Role göre filtrele"
+            aria-label={t("roleFilter.ariaLabel", "Role göre filtrele")}
           >
-            <span className="block truncate">{labelMap[value as Option]}</span>
+            <span className="block truncate">{t(`roleFilter.${value}`)}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-4 w-4 text-gray-500"
@@ -63,7 +58,7 @@ export default function RoleFilter() {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {labelMap[opt]}
+                        {t(`roleFilter.${opt}`)}
                       </span>
                       {selected && (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-2 text-indigo-600">
