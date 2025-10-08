@@ -25,36 +25,6 @@ npx json-server --watch mock-api/db.json --port 3001
 #Uygulamayı çalıştırın;
 npm run dev
 
-🗂 Klasör Yapısı
-role-management/
-├── mock-api/ # Mock API dosyaları
-│ └── db.json # json-server için örnek veritabanı
-├── public/ # Static dosyalar
-├── src/ # Uygulama kaynak kodu
-│ ├── **mocks**/ # i18n için
-│ ├── api/ # API config ve servisler
-│ ├── assets/ # Görseller, ikonlar vb.
-│ ├── components/ # Ortak, tekrar kullanılabilir UI bileşenleri
-│ ├── features/ # Feature bazlı modüller (örn: users)
-│ │ └── users/ # UserSlice, UserTable, RoleFilter, FormDialog vb.
-│ ├── helpers/ # Yardımcı fonksiyonlar
-│ ├── store/ # Redux store ve custom hooks
-│ ├── test-utils/ # Test yardımcıları (RTL setup vb.)
-│ ├── App.css # Global stiller
-│ ├── App.tsx # Ana uygulama bileşeni
-│ ├── i18n.ts # i18next ayarları
-│ ├── index.css # Tailwind giriş noktası
-│ ├── main.tsx # React giriş dosyası
-│ └── types.ts # Global TypeScript tipleri
-├── .eslintrc.cjs # ESLint ayarları
-├── tailwind.config.js # Tailwind konfigürasyonu
-├── jest.config.cjs # Jest test ayarları
-├── setupTests.ts # RTL setup dosyası
-├── tsconfig.app.json # TS app konfig
-├── tsconfig.node.json # TS node konfig
-├── vite.config.ts # Vite ayarları
-└── package.json # Proje bağımlılıkları ve scriptler
-
 📌 Adlandırma Yaklaşımı
 
 Component/Hook: PascalCase → UserFormDialog.tsx
@@ -95,4 +65,4 @@ Basit tema yaklaşımı (renk paleti & utility class’lar)
 
 🕒 Harcanan Süre
 
-Projenin geliştirilmesi yaklaşık 2 gün sürmüştür.
+Projenin geliştirilmesi yaklaşık 1.5 gün sürmüştür.
