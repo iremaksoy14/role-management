@@ -58,44 +58,50 @@ role-management/
 
 
 
-📌 Adlandırma Yaklaşımı
+## 📌 Adlandırma Yaklaşımı
 
-Component/Hook: PascalCase → UserFormDialog.tsx
-Utils/Functions: camelCase → formatDate.ts
-Klasörler: kebab-case → user-table
-Redux Slice: Özelleştirilmiş slice dosyaları → userSlice.ts
+- **Component/Hook** → PascalCase  
+  Örn: `UserFormDialog.tsx`
+- **Utils/Functions** → camelCase  
+  Örn: `formatDate.ts`
+- **Klasörler** → kebab-case  
+  Örn: `user-table`
+- **Redux Slice** → Özelleştirilmiş slice dosyaları  
+  Örn: `userSlice.ts`
 
-📌 State Yönetimi
 
-Redux Toolkit createSlice ile state ayrımı.
-Selector kullanımı ile performans optimizasyonu.
-Async işlemler için createAsyncThunk.
+## 📌 State Yönetimi
 
-📌 Stil Yaklaşımı
+- Redux Toolkit createSlice ile state ayrımı.
+- Selector kullanımı ile performans optimizasyonu.
+- Async işlemler için createAsyncThunk.
 
-Tailwind CSS kullanıldı.
-Ortak utility class’lar @layer components ile özelleştirildi.
-Arka plan renkleri ve tema destekleri tailwind.config.js üzerinden yönetildi.
+  ## 🎨 Stil Yaklaşımı
 
-Özellikler
+- Tailwind CSS kullanıldı  
+- Ortak utility class’lar `@layer components` ile özelleştirildi  
+- Arka plan renkleri ve tema desteği `tailwind.config.js` üzerinden yönetildi  
 
-Kullanıcı Listeleme
-Yeni Kullanıcı Ekleme
-Kullanıcı Rol ve İzin Güncelleme
-Kullanıcı Silme
-İsim Bazlı Arama
-Role Göre Filtreleme
-Pagination
-Çoklu Dil Desteği
-Hata ve Validasyon Kontrolleri
-Accessible UI (aria-label, aria-live, boş liste mesajları vb.)
+## ✨ Özellikler
 
-🎨 Bonus Özellikler
+- Kullanıcı Listeleme  
+- Yeni Kullanıcı Ekleme  
+- Kullanıcı Rol ve İzin Güncelleme  
+- Kullanıcı Silme  
+- İsim Bazlı Arama  
+- Role Göre Filtreleme  
+- Pagination  
+- Çoklu Dil Desteği  
+- Hata ve Validasyon Kontrolleri  
+- Accessible UI (aria-label, aria-live, boş liste mesajları vb.)  
 
-Empty/Loading/Error özel UI’lar
-Performans: Memoization & Reselect Selector
-Basit tema yaklaşımı (renk paleti & utility class’lar)
+## 🎁 Bonus Özellikler
 
-🕒 Harcanan Süre
+- Empty/Loading/Error özel UI’lar  
+- Performans: Memoization & Reselect Selector  
+- Basit tema yaklaşımı (renk paleti & utility class’lar)  
+
+
+## 🕒 Harcana Süre 
 
 Projenin geliştirilmesi yaklaşık 1.5 gün sürmüştür.
