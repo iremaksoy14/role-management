@@ -34,7 +34,7 @@ role-management/
 ├── public/               # Static dosyalar
 ├── src/                  # Uygulama kaynak kodu
 │   ├── __mocks__/        # Test mock dosyaları
-│   │   └── react-i18next.js # i18n için jest mock
+│   │   └── react-i18next.js # i18n için 
 │   ├── api/              # API config ve servisler
 │   ├── assets/           # Görseller, ikonlar vb.
 │   ├── components/       # Ortak, tekrar kullanılabilir UI bileşenleri
