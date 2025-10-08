@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "id": "u-01",
+      "name": "İrem Aksoy",
+      "role": "Admin",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "id": "b476",
+      "name": "Oğuzhan Aydemir",
+      "role": "Doctor",
+      "permissions": [
+        "read"
+      ]
+    }
+  ]
+}

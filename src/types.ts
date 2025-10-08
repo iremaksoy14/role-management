@@ -21,6 +21,7 @@ export interface I18nError {
 export interface UsersState {
   items: User[];
   status: Status;
+  mutating: boolean; 
   error: I18nError | null;
   search: string;
   roleFilter: RoleFilter;

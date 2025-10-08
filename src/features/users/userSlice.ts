@@ -10,6 +10,7 @@ import { BASE_URL } from "@/api/config";
 const initialState: UsersState = {
   items: [],
   status: "idle",
+  mutating: false,
   error: null,
   search: "",
   roleFilter: "all",
@@ -119,15 +120,15 @@ const usersSlice = createSlice({
 
     // create
     builder.addCase(createUser.pending, (s) => {
-      s.status = "loading";
+      s.mutating = true;
       s.error = null;
     });
     builder.addCase(createUser.fulfilled, (s, a) => {
-      s.status = "idle";
+      s.mutating = false;
       s.items.unshift(a.payload);
     });
     builder.addCase(createUser.rejected, (s, a) => {
-      s.status = "error";
+      s.mutating = false;
       s.error =
         typeof a.payload === "string"
           ? { key: a.payload }
@@ -136,16 +137,16 @@ const usersSlice = createSlice({
 
     // update
     builder.addCase(updateUser.pending, (s) => {
-      s.status = "loading";
+      s.mutating = true;
       s.error = null;
     });
     builder.addCase(updateUser.fulfilled, (s, a) => {
-      s.status = "idle";
+      s.mutating = false;
       const i = s.items.findIndex((u) => u.id === a.payload.id);
       if (i !== -1) s.items[i] = a.payload;
     });
     builder.addCase(updateUser.rejected, (s, a) => {
-      s.status = "error";
+      s.mutating = false;
       s.error =
         typeof a.payload === "string"
           ? { key: a.payload }
@@ -154,15 +155,15 @@ const usersSlice = createSlice({
 
     // delete
     builder.addCase(deleteUser.pending, (s) => {
-      s.status = "loading";
+      s.mutating = true;
       s.error = null;
     });
     builder.addCase(deleteUser.fulfilled, (s, a) => {
-      s.status = "idle";
+      s.mutating = false;
       s.items = s.items.filter((u) => u.id !== a.payload);
     });
     builder.addCase(deleteUser.rejected, (s, a) => {
-      s.status = "error";
+      s.mutating = false;
       s.error = { key: "errors.delete" };
     });
   },
@@ -180,6 +181,7 @@ export const selectSearch = (state: RootLike) => state.users.search;
 export const selectRole = (state: RootLike) => state.users.roleFilter;
 export const selectPage = (state: RootLike) => state.users.page;
 export const selectPageSize = (state: RootLike) => state.users.pageSize;
+export const selectMutating = (state: RootLike) => state.users.mutating;
 
 export const selectFilteredUsers = createSelector(
   [selectItems, selectSearch, selectRole],

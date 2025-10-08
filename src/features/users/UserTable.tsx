@@ -3,7 +3,12 @@ import type { User } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import PermissionsBadges from "./PermissionsBadges";
-import { deleteUser, selectStatus, selectPagedUsers } from "../users/userSlice";
+import {
+  deleteUser,
+  selectStatus,
+  selectPagedUsers,
+  selectMutating,
+} from "../users/userSlice";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import { useTranslation } from "react-i18next";
 import { getInitials } from "@/helpers";
@@ -16,11 +21,12 @@ export default function UserTable({ onEdit }: Props) {
   const users = useAppSelector(selectPagedUsers);
   const status = useAppSelector(selectStatus);
   const { t } = useTranslation();
+  const mutating = useAppSelector(selectMutating);
 
   const [toDelete, setToDelete] = useState<User | null>(null);
   const [busy, setBusy] = useState(false);
 
-  const actionDisabled = status === "loading" || busy;
+  const actionDisabled = mutating || busy;
   const isLoading = status === "loading";
 
   const handleDelete = async () => {

@@ -140,7 +140,7 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                   required
                   aria-describedby="name-error"
                   aria-invalid={!!errors.name}
-                  className="mt-1 bg-white block w-full rounded-md border border-gray-300 p-2 text-gray-700"
+                  className="mt-1  block w-full rounded-md border border-gray-300 p-2 text-gray-700"
                 />
                 {errors.name && (
                   <p
@@ -154,7 +154,11 @@ export default function UserFormDialog({ open, initial, onClose }: Props) {
                 )}
               </div>
 
-              <RoleSelect value={role} onChange={setRole} label={t("userForm.role")} />
+              <RoleSelect
+                value={role}
+                onChange={setRole}
+                label={t("userForm.role")}
+              />
               <PermissionsMultiSelect
                 value={permissions}
                 onChange={setPermissions}

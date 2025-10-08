@@ -6,6 +6,7 @@ import {
   fetchUsers,
   selectTotalCount,
   selectStatus,
+  selectMutating,
   selectError,
 } from "./features/users/userSlice";
 import type { TOptions } from "i18next";
@@ -29,6 +30,7 @@ function App() {
   const dispatch = useAppDispatch();
   const total = useAppSelector(selectTotalCount);
   const status = useAppSelector(selectStatus);
+  const mutating = useAppSelector(selectMutating);
   const error = useAppSelector(selectError);
   const { t } = useTranslation();
 
@@ -57,11 +59,11 @@ function App() {
             <RoleFilter />
           </div>
           <div className="flex items-center gap-3">
-            {status === "loading" && <Loader />}
+            {mutating && <Loader />}
             <button
               type="button"
               onClick={onCreate}
-              className="inline-flex items-center gap-2 rounded-lg bg-line px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+              className="inline-flex items-center gap-2 rounded-lg bg-line px-3 py-2 text-sm font-medium text-white"
             >
               <PlusIcon className="h-4 w-4" aria-hidden="true" />
               {t("userForm.newTitle")}

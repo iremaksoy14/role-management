@@ -1,82 +1,98 @@
-Role Management – Case Çalışması
+Role Management Frontend Case
 
-Sağlık kuruluşu için kullanıcı rol ve izin yönetim paneli geliştirilmesi üzerine hazırlanmıştır.
-Amaç, modern frontend prensiplerini, state management yaklaşımını, erişilebilirlik (A11y) uygulamalarını ve kullanıcı deneyimi odaklı geliştirmeyi göstermektir.
+Bu proje, bir sağlık kuruluşu için kullanıcı yönetim paneli geliştirme senaryosu kapsamında hazırlanmıştır.
+Panelde kullanıcılar listelenebilir, yeni kullanıcı eklenebilir, mevcut kullanıcıların rol ve izinleri güncellenebilir, ayrıca kullanıcılar silinebilir.
 
-🚀 Özellikler
+🚀 Kullanılan Teknolojiler
 
-👤 Kullanıcı Yönetimi
+React (TypeScript) → Modern frontend geliştirme için.
+Redux Toolkit → Global state yönetimi (slice & selector yapısı).
+Headless UI → Erişilebilir, özelleştirilebilir UI bileşenleri.
+Tailwind CSS → Hızlı ve ölçeklenebilir stil yönetimi.
+i18next → Çoklu dil desteği.
+json-server → Mock API için.
 
-Kullanıcı listesi görüntüleme
-Yeni kullanıcı ekleme
-Kullanıcı rol güncelleme (Admin, Doctor, Patient)
-Kullanıcı silme
-İsim bazlı arama
-Role göre filtreleme
-
-🔑 İzin Yönetimi
-
-Kullanıcıya bir veya birden fazla izin atanabilmesi (örn. read, write)
-
-⚡ Performans & UX
-
-Pagination ile uzun listelerde performans optimizasyonu
-Boş / tekrar isim kontrolü ve doğrulama
-Anlamlı hata/uyarı mesajları
-Headless UI bileşenleri ile erişilebilir arayüz
-
-🌍 Çok Dilli Destek (i18next)
-
-react-i18next ile proje Türkçe ve İngilizce desteklemektedir.
-Önemli başlıklar, buton metinleri ve hata mesajları çeviriye bağlandı.
-Dinamik çeviri interpolasyonu:
-
-🎁 Opsiyonel Ekstralar
-
-Empty / Loading / Error durumlarına özel UI
-Küçük test senaryoları (React Testing Library + jest-axe ile A11y testleri)
-Memoization & selector optimizasyonları
-Basit tema / Design System yaklaşımı
-
-🛠 Kullanılan Teknolojiler
-
-⚛️ React 18
-📘 TypeScript
-🗂 Redux Toolkit
-🎨 Tailwind CSS
-♿ Headless UI
-⚡ Vite
-🧪 Jest, React Testing Library, jest-axe (testler için)
-
-📂 Proje Yapısı ve Kod Standartları
-
-Component / Hook → PascalCase → UserTable.tsx, useUser.ts
-Util / Helper → camelCase → formatDate.ts
-Klasörler → kebab-case → user-profile/
-Importlar → Alias (@/) kullanımı
-Barrel → Uygun yerlerde index.ts export
-State Yönetimi → features/users/userSlice.ts altında Redux slice’ları, selector’lar ve async thunk’lar
-Stil → Tailwind CSS (özelleştirilmiş config ile utility-first)
-
-Commit Mesajları → Anlamlı ve adım adım, tek commit değil süreci yansıtır şekilde
-
-♿ Erişilebilirlik (A11y)
-
-Form alanlarında label, aria-\* ve hata mesajları için role="alert" kullanımı
-Headless UI bileşenleri (Dialog, Listbox) → klavye ve screen reader uyumlu
-Boş liste / sonuç yok durumlarında anlamlı geri bildirim mesajları
-jest-axe ile otomatik erişilebilirlik testleri
-
-🏃‍♂️ Kurulum ve Çalıştırma
+#Kurulum ve Çalıştırma
+git clone <repo-url>
 cd role-management
+
+#Bağımlılıkları yükleyin:
 npm install
-npx json-server --watch db.json --port 3001
+
+#Mock API başlatın:
+npx json-server --watch mock-api/db.json --port 3001
+
+#Uygulamayı çalıştırın;
 npm run dev
 
-NOT:
-Case süresince temel gereksinimler tamamlandı. Bonus olarak:
+🗂 Klasör Yapısı
+role-management/
+├── mock-api/ # Mock API dosyaları
+│ └── db.json # json-server için örnek veritabanı
+├── public/ # Static dosyalar
+├── src/ # Uygulama kaynak kodu
+│ ├── **mocks**/ # i18n için
+│ ├── api/ # API config ve servisler
+│ ├── assets/ # Görseller, ikonlar vb.
+│ ├── components/ # Ortak, tekrar kullanılabilir UI bileşenleri
+│ ├── features/ # Feature bazlı modüller (örn: users)
+│ │ └── users/ # UserSlice, UserTable, RoleFilter, FormDialog vb.
+│ ├── helpers/ # Yardımcı fonksiyonlar
+│ ├── store/ # Redux store ve custom hooks
+│ ├── test-utils/ # Test yardımcıları (RTL setup vb.)
+│ ├── App.css # Global stiller
+│ ├── App.tsx # Ana uygulama bileşeni
+│ ├── i18n.ts # i18next ayarları
+│ ├── index.css # Tailwind giriş noktası
+│ ├── main.tsx # React giriş dosyası
+│ └── types.ts # Global TypeScript tipleri
+├── .eslintrc.cjs # ESLint ayarları
+├── tailwind.config.js # Tailwind konfigürasyonu
+├── jest.config.cjs # Jest test ayarları
+├── setupTests.ts # RTL setup dosyası
+├── tsconfig.app.json # TS app konfig
+├── tsconfig.node.json # TS node konfig
+├── vite.config.ts # Vite ayarları
+└── package.json # Proje bağımlılıkları ve scriptler
 
-Empty / Loading / Error state’leri
-A11y düzenlemeleri
-jest-axe tabanlı erişilebilirlik için paket
-eklendi.
+📌 Adlandırma Yaklaşımı
+
+Component/Hook: PascalCase → UserFormDialog.tsx
+Utils/Functions: camelCase → formatDate.ts
+Klasörler: kebab-case → user-table
+Redux Slice: Özelleştirilmiş slice dosyaları → userSlice.ts
+
+📌 State Yönetimi
+
+Redux Toolkit createSlice ile state ayrımı.
+Selector kullanımı ile performans optimizasyonu.
+Async işlemler için createAsyncThunk.
+
+📌 Stil Yaklaşımı
+
+Tailwind CSS kullanıldı.
+Ortak utility class’lar @layer components ile özelleştirildi.
+Arka plan renkleri ve tema destekleri tailwind.config.js üzerinden yönetildi.
+
+Özellikler
+
+Kullanıcı Listeleme
+Yeni Kullanıcı Ekleme
+Kullanıcı Rol ve İzin Güncelleme
+Kullanıcı Silme
+İsim Bazlı Arama
+Role Göre Filtreleme
+Pagination
+Çoklu Dil Desteği
+Hata ve Validasyon Kontrolleri
+Accessible UI (aria-label, aria-live, boş liste mesajları vb.)
+
+🎨 Bonus Özellikler
+
+Empty/Loading/Error özel UI’lar
+Performans: Memoization & Reselect Selector
+Basit tema yaklaşımı (renk paleti & utility class’lar)
+
+🕒 Harcanan Süre
+
+Projenin geliştirilmesi yaklaşık 2 gün sürmüştür.

@@ -14,9 +14,9 @@ export default function SearchBar() {
       </label>
       <input
         id="search"
-        type="search"
+        type="text"
         placeholder={t("userForm.searchByName")}
-        className="w-full text-gray-700  rounded-lg border p-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+        className="w-full text-gray-700 rounded-lg border p-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
         value={value}
         onChange={(e) => dispatch(setSearch(e.target.value))}
       />
