@@ -25,7 +25,7 @@ npx json-server --watch mock-api/db.json --port 3001
 # Uygulamayı çalıştırın;
 npm run dev
 
-# Dosya yapısı
+Dosya yapısı
 role-management/
 ├── mock-api/                 # Mock API dosyaları
 │   └── db.json               # json-server için örnek veritabanı
