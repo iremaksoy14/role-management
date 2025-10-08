@@ -12,17 +12,17 @@ Tailwind CSS → Hızlı ve ölçeklenebilir stil yönetimi.
 i18next → Çoklu dil desteği.
 json-server → Mock API için.
 
-#Kurulum ve Çalıştırma
+# Kurulum ve Çalıştırma
 git clone <repo-url>
 cd role-management
 
-#Bağımlılıkları yükleyin:
+# Bağımlılıkları yükleyin:
 npm install
 
-#Mock API başlatın:
+# Mock API başlatın:
 npx json-server --watch mock-api/db.json --port 3001
 
-#Uygulamayı çalıştırın;
+# Uygulamayı çalıştırın;
 npm run dev
 
 
